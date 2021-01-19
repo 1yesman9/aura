@@ -210,11 +210,11 @@ By the end of calculation, this reduce function will return the maximum value, o
 
 Min can be implemented by replacing -math.huge with math.huge and > with <.
 
-## Common effects & auras
+## Common Effects & Auras
 
 You can implement these apply functions however, the important thing the library offers is that value is recalculated via the reduce function on addition and removal of the effect.
 
-### stun
+### Stun
 ```lua
 --effects
 local cooldown = {
@@ -245,7 +245,7 @@ end
 Supposing that you run aura.hasEffect(character, 'cooldown') to determine wether or not the character can cast abilities, and that the sum of other speed boosts don't exceed 10000, this works as expected.
 
 
-### percent or flat speed modifiers
+### Percent or Flat Speed Modifiers
 ```lua
 --effects
 local speedBoost = {
