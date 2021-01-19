@@ -272,7 +272,7 @@ end
 --usage
 aura.applyAura(character, "SpeedBoost", {Duration=10, Type="Flat", Value=20}) -- apply 20 walkspeed buff
 wait(1)
-aura.applyAura(character, "SpeedBoost", {Duration=5, Type="Percent", Value=100}) -- apply 100% walkspeed buff
+aura.applyAura(character, "SpeedBoost", {Duration=5, Type="Percent", Value=100}) -- apply 100% (2x) walkspeed buff
 
 ```
 
