@@ -35,14 +35,14 @@ The meaning of these fields will become more clear once we consider what aura do
 An effect instance is a table that represents an actual effect applied to an object. For every effect you actually apply, one effect instance will be generated. Effect Instances are empty by default, but you can specify fields to highlight the differences between instances of the same effect. For example, one stun effect may have a duration of 1, while another might have a duration of 2.
 
 ## Calculating Effects
-Everytime an effect instance is applied/removed to or from an object the follow steps are executed:
+Behind the scenes, every time an effect instance is applied/removed to or from an object the follow steps are executed:
 1. The effect the effect instance belongs to is determined.
 2. A value is initially set to effect.Default.
 3. effect.Reduce is run on each currently active effectInstance belonging to the effect in order to determine a final calculated value.
 4. effect.Apply(object, calculatedValue)
 
 ```lua
---pseudo code for calculating an effect
+--pseudo code expressing what aura does behind the scenes
 local effect -- whatever effect is associated with the effect instance
 local value = effectInstance.Default
 
