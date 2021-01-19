@@ -100,7 +100,7 @@ end
 
 Given this definition, when a user applies the speedBoost aura, a settings table can be optionally passed in. In that case, an aura instance containing a speed boost effect instance will be generated. The custom field Value of the speed boost effect instance will depend on settings, and default to 10 if no Value setting was specified.
 
-### Special Fields
+### Special Effect Instance Fields
 Although you can generally construct effect instances with any custom fields, some fields are reserved and have special behavior.
 
 `Duration: Number`
