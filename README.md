@@ -186,7 +186,7 @@ local effect = {
 }
 ```
 
-This reduce function will return true, if one or more effect instances exist. This should be used for something like a stun, where you want to apply the stun if 1 or more stuns are applied, and remove it when 0 are applied.
+If no effect instances exist, the calculated value will default to false. If one or more exists, the calculated value will be true. This should be used for something like a stun, where you want to apply the stun if 1 or more stuns are applied, and remove it when 0 are applied.
 
 ### Sum
 ```lua
