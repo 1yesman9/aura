@@ -71,8 +71,8 @@ An Aura is a package of one or more effects. Although we've talked about applyin
 
 In actuality, an aura is of the type: Function(settings: Table) -> auraInstance
 
-### Aura Instance
-Like an effect instance, an aura instance are tables representing an active auras applied to an object.
+### Aura Instances
+Like an effect instance, an aura instance is a tables representing an active aura applied to an object.
 
 You create aura instances by constructing a table with the following fields:
 ```lua
