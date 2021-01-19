@@ -102,7 +102,7 @@ Given this definition, when a user applies the speedBoost aura, a settings table
 Although you can generally construct effect instances with any custom fields, some fields are reserved and have special behavior.
 
 `Duration: Number`
-The effect will be removed after this many seconds have been elapsed.
+The effect will be removed after this many seconds have elapsed.
 
 `Tick: Number`
 So long as the effect is active, it will be recalculated every Tick seconds.
@@ -119,6 +119,25 @@ Given an auraName and settings, generates an auraInstance and applies it to the 
 
 Removes an aura instance from an object.
 
+#### `aura.removeAura(object: Instance, auraName: String)`
+
+Removes all aura instances of the given aura applied from an object.
+
+#### `aura.hasAura(object: Instance, auraName: String) -> bool`
+
+Returns wether or not an object currently has 1 or more instances of a given aura applied.
+
+#### `aura.getAuras(object: Instance)`
+
+Returns array of names of all auras currently applied to the object
+
+#### `aura.hasEffect(object: Instance, effectName: String) -> bool`
+
+Returns wether or not an object currently has 1 or more instances of a given effect applied.
+
+#### `aura.getEffectValue(object: Instance, effectName: String) -> bool`
+
+Returns the calculated value of all effect instances of a given effect currently applied to the object. If no instances are applied, will return the effects default value.
 
 
 
