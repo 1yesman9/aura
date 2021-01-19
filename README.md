@@ -83,6 +83,8 @@ You create aura instances by constructing a table with the following fields:
 }
 ```
 
+When an aura instance is applied, for each element in it's EffectInstances field, an effectInstance will be constructed and applied to the object. The effect is specified by effectId, and the effectInstance itself will be a copy of the table in the element's value.
+
 Since effects can only be applied through auras, to use our speed boost effect, we must create at least 1 aura which contains it.
 ```lua
 local speedBoost = function(settings)
@@ -96,7 +98,9 @@ end
 
 Given this definition, when a user applies the speedBoost aura, a settings table can be optionally passed in. In that case, an aura instance containing a speed boost effect instance will be generated. The custom value field of the speed boost effect instance will depend on settings, and default to 10 if no Value setting was specified.
 
-##Aura Instance Id
+### Field
+
+## Aura Instance Id
 A GUID identifying a specific aura instance that's been applied to an object. Used to remove aura instances from objects.
 
 # Library
