@@ -8,14 +8,17 @@ An effect is a scheme for a specific way to manipulate an object. For example, a
 
 You create effects by constructing tables with 3 fields:
 
+```lua
 {
   Default: Variant, 
   reduce: Function(sum: Variant, effectInstance: EffectInstance), 
   apply: Function(object: Instance, sum: Variant)
 }
+```
 
 Here's an example of a speed boost effect
 
+```lua
 local speedBoost = {
   Default = 16,
   reduce = function(sum, effectInstance) return sum + effectInstance.Value end,
@@ -23,6 +26,7 @@ local speedBoost = {
     character.Humanoid.WalkSpeed = sum
   end
 }
+```
 
 The meaning of these fields will become more clear once we consider what aura does when applying and removing effects.
 
