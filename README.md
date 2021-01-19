@@ -1,9 +1,11 @@
-# Aura
+# Description
 Aura is a simple library for managing status effects.
 
 Specifically, there's an issue where the removal of one status effect interferes with other existing status effects. For example, suppose that stuns A & B are applied simultaneously, then removed after 1 and 2 seconds respectively. Depending on the implementation, the removal of stun A might allow the player to move again, even though stun B is still active for another second. In short, Aura solves this problem by checking if there are any remaining active stuns before unstunning the player.
 
-# Effect
+# Documentation
+<br>
+## Effect
 An effect is a scheme for a specific way to manipulate an object. For example, a speed boost effect would describe the default speed of the object, how to figure out the object's speed based on all the speed effects currently applied to it, and how to actually given the object that speed.
 
 You create effects by constructing tables with 3 fields:
