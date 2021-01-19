@@ -100,11 +100,11 @@ Given this definition, when a user applies the speedBoost aura, a settings table
 A GUID identifying a specific aura instance that's been applied to an object. Used to remove aura instances from objects.
 
 # Library
-### aura.applyAura(object: Instance, auraName: String, settings: [Table]) -> auraInstanceId
+`aura.applyAura(object: Instance, auraName: String, settings: [Table]) -> auraInstanceId`
 
 Given an auraName and settings, generates an auraInstance and applies it to the given object. Returns the id of the aura instance, which can be used to remove it later on.
 
-### aura.removeAuraInstance(object: Instance, id: auraInstanceId)
+`aura.removeAuraInstance(object: Instance, id: auraInstanceId)`
 
 Removes an aura instance from an object.
 
