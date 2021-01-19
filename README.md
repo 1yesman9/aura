@@ -64,6 +64,8 @@ Suppose that there's one speed boost effect instance A with a custom field Value
 
 Recall that the speedBoost.reduce returns the first argument + the secondArgument.Value, and that effect.apply sets object.Humanoid.WalkSpeed equal to the second argument. With this, the character will have the correct walkspeed based on the effect instances currently applied.
 
+Note that this specific case is academic. Addition is associative, so there's no issues with just adding and subtracting to walkspeed implement speed boost, rather than using this library.
+
 ## Auras
 An Aura is a package of one or more effects. Although we've talked about applying effects, there is no way for a user of the library to apply one directly. Users apply auras, then effect instances are generated and applied for each effect contained in the aura. Auras also serve as an interface between the caller and the underlying effect.
 
@@ -102,10 +104,41 @@ Given this definition, when a user applies the speedBoost aura, a settings table
 Although you can generally construct effect instances with any custom fields, some fields are reserved and have special behavior.
 
 `Duration: Number`
-The effect will be removed after this many seconds have elapsed.
+This effect will be removed after Duration ( in seconds ) has elapsed.
 
 `Tick: Number`
-So long as the effect is active, it will be recalculated every Tick seconds.
+So long as the effect is active, it will be recalculated every Tick ( in seconds ).
+
+`Cleanup: Bool`
+This effect will be recalculated when the object is removed. Useful if the effect has side effects beyond the object.
+
+### Aura Instance Field Replication
+All fields of an aura instance except EffectInstances are applied to each effectInstance. This is commonly used for fields like duration, since it's typical that every effect in an aura will last for the same duration.
+
+Not taking advantage of field replication:
+```lua
+local stun = function(settings)
+  return {
+    EffectInstances = {
+      snare = {Duration=settings.Duration},
+      silence = {Duration=settings.Duration},
+    }
+  }
+end
+```
+
+Taking advantage of field replication:
+```lua
+local stun = function(settings)
+  return {
+    Duration = settings.Duration,
+    EffectInstances = {
+      snare = {},
+      silence = {},
+    }
+  }
+end
+```
 
 ## Aura Instance Id
 A GUID identifying a specific aura instance that's been applied to an object. Used to remove aura instances from objects.
@@ -138,6 +171,115 @@ Returns wether or not an object currently has 1 or more instances of a given eff
 #### `aura.getEffectValue(object: Instance, effectName: String) -> bool`
 
 Returns the calculated value of all effect instances of a given effect currently applied to the object. If no instances are applied, will return the effects default value.
+
+# Usage
+
+## Common Reduce Functions
+
+Reduce functions are used to figure out the current "value" of an effect, given currently applied effect instances. Naturally, since the default is the first argument of the first call of reduce during effect calculation, we must specify it when specifying reduce functions.
+
+### One or More
+```lua
+local effect = {
+  Default = false,
+  reduce = function() return true end
+}
+```
+
+This reduce function will return true, if one or more effect instances exist. This should be used for something like a stun, where you want to apply the stun if 1 or more stuns are applied, and remove it when 0 are applied.
+
+### Sum
+```lua
+local effect = {
+  Default = 0, --additive identity
+  reduce = function(sum, effectInstance) return sum + effectInstance.Value end
+}
+```
+
+By the end of calculation, this reduce function will return the sum of all effectInstance value fields. This isn't particularly useful if your apply is just gonna set something to the sum, but may be if ur apply does something more interesting, like switching based on the range your sum is in.
+
+### Max
+```lua
+local effect = {
+  Default = -math.huge, --whatever ur default value is
+  reduce = function(sum, effectInstance) return sum > effectInstance.Value and sum or effectInstance.Value end
+}
+```
+
+By the end of calculation, this reduce function will return the maximum value, or negative infinity ( if no effect instances are active ). We can replace -math.huge with a more usable value like 0, so long as it's less than the minimum value you can pass in ( you can implement a minimum by clamping a setting in the aura ). Alternatively we can deinit when sum < some interesting value in our apply function.
+
+Min can be implemented by replacing -math.huge with math.huge and > with <.
+
+## Common effects & auras
+
+You can implement these apply functions however, the important thing the library offers is that value is recalculated via the reduce function on addition and removal of the effect.
+
+### stun
+```lua
+--effects
+local cooldown = {
+  Default = false,
+  reduce = function() return true end,
+  apply = function() end
+}
+
+local speedBoost = {
+  Default = 16,
+  reduce = function(sum, effectInstance) return sum + effectInstance.Value end
+  apply = function(character, sum)
+    character.Humanoid.WalkSpeed = sum
+  end
+}
+
+--aura
+local Stun = function(settings)
+  return {
+    Duration = settings.Duration,
+    EffectInstances = {
+      cooldown = {},
+      speedBoost = {Value=-10000}
+    }
+end
+```
+
+Supposing that you run aura.hasEffect(character, 'cooldown') to determine wether or not the character can cast abilities, and that the sum of other speed boosts don't exceed 10000, this works as expected.
+
+
+### percent or flat speed modifiers
+```lua
+--effects
+local speedBoost = {
+  Default = {Flat=16,Percent=1},
+  reduce = function(sum, effectInstance) 
+    local newSum = {}
+    newSum[effectInstance.Type] = newSum[effectInstance.Type] + effectInstance.Value
+    return newSum
+  end,
+  apply = function(character, speedModifier)
+    character.Humanoid.WalkSpeed = speedModifier.Flat * speedModifier.Percent / 100
+  end
+}
+
+--aura
+local SpeedBoost = function(settings)
+  return {
+    Duration = settings.Duration,
+    EffectInstances = {
+      speedBoost = {Type=settings.Type, Value=settings.Value}
+    }
+end
+
+--usage
+aura.applyAura(character, "SpeedBoost", {Duration=10, Type="Flat", Value=20}) -- apply 20 walkspeed buff
+wait(1)
+aura.applyAura(character, "SpeedBoost", {Duration=5, Type="Percent", Value=100}) -- apply 100% walkspeed buff
+
+```
+
+
+
+
+
 
 
 
