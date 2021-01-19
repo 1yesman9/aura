@@ -90,7 +90,7 @@ Since effects can only be applied through auras, to use our speed boost effect, 
 local speedBoost = function(settings)
   return {
     EffectInstances = {
-      speedBoost = {Value=settings.Value or 10}
+      speedBoost = {Value=settings.Value or 10} --speedBoost is the effect, {Value=settings.Value or 10} is the effectInstance
     }
   }
 end
@@ -98,7 +98,14 @@ end
 
 Given this definition, when a user applies the speedBoost aura, a settings table can be optionally passed in. In that case, an aura instance containing a speed boost effect instance will be generated. The custom value field of the speed boost effect instance will depend on settings, and default to 10 if no Value setting was specified.
 
-### Field
+### Special Fields
+Although you can generally construct effect instances with any custom fields, some fields are reserved and have special behavior.
+
+`Duration: Number`
+The effect will be removed after this many seconds have been elapsed.
+
+`Tick: Number`
+So long as the effect is active, it will be recalculated every Tick seconds.
 
 ## Aura Instance Id
 A GUID identifying a specific aura instance that's been applied to an object. Used to remove aura instances from objects.
@@ -106,7 +113,7 @@ A GUID identifying a specific aura instance that's been applied to an object. Us
 # Library
 #### `aura.applyAura(object: Instance, auraName: String, settings: [Table]) -> auraInstanceId`
 
-Given an auraName and settings, generates an auraInstance and applies it to the given object. Returns the id of the aura instance, which can be used to remove it later on.
+Given an auraName and settings, generates an auraInstance and applies it to the given object. Returns the id of the aura instance, which can be used to remove it later on. When the aura is called, settings will be passed in as the first argument. If settings is left empty, an empty table is passed in instead.
 
 #### `aura.removeAuraInstance(object: Instance, id: auraInstanceId)`
 
