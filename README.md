@@ -40,8 +40,8 @@ An effect instance is a table that represents an actual effect applied to an obj
 Behind the scenes, every time an effect instance is applied/removed to or from an object the follow steps are executed:
 1. The effect the effect instance belongs to is determined.
 2. A value is initially set to effect.Default.
-3. effect.Reduce is run on each currently active effectInstance belonging to the effect in order to determine a final calculated value.
-4. effect.Apply(object, calculatedValue)
+3. for each currently active effectInstance belonging to the effect, effect.Reduce is run on it and the previous value to determine a new value
+4. effect.apply(object, value)
 
 ```lua
 --pseudo code expressing what aura does behind the scenes
