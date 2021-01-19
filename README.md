@@ -201,7 +201,7 @@ By the end of calculation, this reduce function will return the sum of all effec
 ### Max
 ```lua
 local effect = {
-  Default = -math.huge, --whatever ur default value is
+  Default = -math.huge, --neg inf
   reduce = function(sum, effectInstance) return sum > effectInstance.Value and sum or effectInstance.Value end
 }
 ```
