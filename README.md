@@ -30,7 +30,7 @@ local speedBoost = {
 
 The meaning of these fields will become more clear once we consider what aura does when applying and removing effects.
 
-# Effect Instance
+## Effect Instance
 An effect instance is a table that represents an actual effect applied to an object. For every effect you actually apply, one effect instance will be generated. Effect instances are actually tables
 
 # aura
