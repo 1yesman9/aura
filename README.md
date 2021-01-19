@@ -170,7 +170,7 @@ Returns wether or not an object currently has 1 or more instances of a given eff
 
 #### `aura.getEffectValue(object: Instance, effectName: String) -> Variant`
 
-Returns the calculated value of the given effect, based on all effect instances currently applied to the object. If no instances are applied, will return effect.default.
+Returns the calculated value of the given effect, based on all effect instances currently applied to the object. If no instances are applied, will return effect.Default.
 
 # Usage
 
@@ -219,7 +219,7 @@ You can implement these apply functions however, the important thing the library
 --effects
 local cooldown = {
   Default = false,
-  reduce = function() return true end,
+  reduce = function() end,
   apply = function() end
 }
 
