@@ -251,7 +251,7 @@ Supposing that you run aura.hasEffect(character, 'cooldown') to determine wether
 local speedBoost = {
   Default = {Flat=16,Percent=100},
   reduce = function(sum, effectInstance) 
-    local newSum = {}
+    local newSum = {sum.Flat, sum.Percent}
     newSum[effectInstance.Type] = newSum[effectInstance.Type] + effectInstance.Value
     return newSum
   end,
