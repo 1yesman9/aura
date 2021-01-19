@@ -62,7 +62,7 @@ Suppose that there's one speed boost effect instance A with a custom field Value
 3. value is set to effect.reduce(value, effectInstanceB), or 46.
 4. effect.apply(object, value)
 
-Recall that the speedBoost.reduce returns the first argument + the secondArgument.Value, and that effect.apply sets object.Humanoid.WalkSpeed equal to the second argument. With this, the character will have the correct walkspeed based on the effect instances currently applied.
+Recall that the speedBoost.reduce returns the first argument + the secondArgument.Value, and that speedBoost.apply sets object.Humanoid.WalkSpeed equal to the second argument. With this, the character will have the correct walkspeed based on the effect instances currently applied.
 
 Note that this specific case is academic. Addition is associative, so there's no issues with just adding and subtracting to walkspeed to implement speed boost, rather than using this library.
 
