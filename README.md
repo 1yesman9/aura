@@ -276,6 +276,7 @@ aura.applyAura(character, "SpeedBoost", {Duration=5, Type="Percent", Value=100})
 
 ```
 
+Here we demonstrate how we can handle a more complicated scenarios, like allowing the user to mutate a single property in multiple ways. In these cases, it comes down to passing extra information into the effect instance that determines how it influences the final calculation.
 
 
 
