@@ -64,7 +64,7 @@ Suppose that there's one speed boost effect instance A with a custom field Value
 
 Recall that the speedBoost.reduce returns the first argument + the secondArgument.Value, and that effect.apply sets object.Humanoid.WalkSpeed equal to the second argument. With this, the character will have the correct walkspeed based on the effect instances currently applied.
 
-Note that this specific case is academic. Addition is associative, so there's no issues with just adding and subtracting to walkspeed implement speed boost, rather than using this library.
+Note that this specific case is academic. Addition is associative, so there's no issues with just adding and subtracting to walkspeed to implement speed boost, rather than using this library.
 
 ## Auras
 An Aura is a package of one or more effects. Although we've talked about applying effects, there is no way for a user of the library to apply one directly. Users apply auras, then effect instances are generated and applied for each effect contained in the aura. Auras also serve as an interface between the caller and the underlying effect.
