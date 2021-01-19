@@ -249,7 +249,7 @@ Supposing that you run aura.hasEffect(character, 'cooldown') to determine wether
 ```lua
 --effects
 local speedBoost = {
-  Default = {Flat=16,Percent=1},
+  Default = {Flat=16,Percent=100},
   reduce = function(sum, effectInstance) 
     local newSum = {}
     newSum[effectInstance.Type] = newSum[effectInstance.Type] + effectInstance.Value
