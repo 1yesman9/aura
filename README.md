@@ -144,11 +144,11 @@ end
 A GUID identifying a specific aura instance that's been applied to an object. Used to remove aura instances from objects.
 
 # Library
-#### `aura.applyAura(object: Instance, auraName: String, settings: [Table]) -> auraInstanceId`
+#### `aura.applyAura(object: Instance, auraName: String, settings: [Table]) -> AuraInstanceId`
 
 Given an auraName and settings, generates an auraInstance and applies it to the given object. Returns the id of the aura instance, which can be used to remove it later on. When the aura is called, settings will be passed in as the first argument. If settings is left empty, an empty table is passed in instead.
 
-#### `aura.removeAuraInstance(object: Instance, id: auraInstanceId)`
+#### `aura.removeAuraInstance(object: Instance, id: AuraInstanceId)`
 
 Removes an aura instance from an object.
 
@@ -156,21 +156,21 @@ Removes an aura instance from an object.
 
 Removes all aura instances of the given aura applied from an object.
 
-#### `aura.hasAura(object: Instance, auraName: String) -> bool`
+#### `aura.hasAura(object: Instance, auraName: String) -> Bool`
 
 Returns wether or not an object currently has 1 or more instances of a given aura applied.
 
-#### `aura.getAuras(object: Instance)`
+#### `aura.getAuras(object: Instance) -> Table`
 
 Returns array of names of all auras currently applied to the object
 
-#### `aura.hasEffect(object: Instance, effectName: String) -> bool`
+#### `aura.hasEffect(object: Instance, effectName: String) -> Bool`
 
 Returns wether or not an object currently has 1 or more instances of a given effect applied.
 
-#### `aura.getEffectValue(object: Instance, effectName: String) -> bool`
+#### `aura.getEffectValue(object: Instance, effectName: String) -> Variant`
 
-Returns the calculated value of all effect instances of a given effect currently applied to the object. If no instances are applied, will return the effects default value.
+Returns the most recently calculated value of all effect instances of a given effect currently applied to the object. If no instances are applied, will return the effect's default value.
 
 # Usage
 
