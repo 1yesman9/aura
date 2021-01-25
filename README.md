@@ -7,7 +7,7 @@ Specifically, there's an issue where the removal of one status effect interferes
 Since you define effects and auras on your own, it's necessary to have a basic understanding of the libraries' datatypes and execution model.
 
 ## Effects
-An effect is a scheme for a specific way to manipulate an object. For example, a speed boost effect would describe the default speed of the object, how to figure out the object's speed based on all the speed effects currently applied to it, and how to give the object that speed.
+An effect details a specific way to manipulate an object. For example, a speed boost effect would describe the default speed of the object, how to figure out the object's speed based on all the speed effects currently applied to it, and how to give the object that speed.
 
 You create effects by constructing tables with 3 fields:
 
