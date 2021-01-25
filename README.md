@@ -176,7 +176,7 @@ Returns the calculated value of the given effect, based on all effect instances 
 
 ## Common Reduce Functions
 
-Reduce functions are used to figure out the current "value" of an effect, given currently applied effect instances. Naturally, since the default is the first argument of the first call of reduce during effect calculation, we must specify it when specifying reduce functions.
+Reduce functions are used to figure out the current "value" of an effect, given currently applied effect instances. Naturally, since the default is the first argument of the first call of reduce during effect calculation, we should specify it as well.
 
 ### One or More
 ```lua
